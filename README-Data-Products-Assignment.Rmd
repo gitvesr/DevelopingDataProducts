@@ -1,0 +1,19 @@
+---
+title: "README-assignment"
+author: "vesr"
+date: "December 1, 2017"
+output: html_document
+---
+
+Coursera [Developing Data Products](https://www.coursera.org/course/devdataprod) course project
+==============================
+
+This application has been created as a course project for the first run (Nov 26 - Dec 1, 2017) of the Developing Data Products course.
+
+
+- Application:  Shiny Application has been deployed in <https://vesr.shinyapps.io/DevDataProductsVersion5/>
+
+- Github repository:  readme file, application, Server.R and ui.R are located in  <https://github.com/gitvesr/DevelopingDataProducts>
+
+- Rpub:  Pitch for the application with clear instructions <http://rpubs.com/vesr/ShinyAppsPitch>
+

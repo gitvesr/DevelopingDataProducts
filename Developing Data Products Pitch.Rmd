@@ -1,0 +1,77 @@
+---
+title: 'Developing Data Products: Shiny Application with Reactive Input'
+author: "Ve...n Sri..n"
+date: "November 28-December 01, 2017"
+output:
+  ioslides_presentation: default
+  slidy_presentation: default
+  transition: rotate
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tableHTML)
+library(xml2)
+library(rvest)
+library(dplyr)
+library(RCurl)
+library(lubridate)
+library(curl)
+```
+##  Introduction 
+
+<div class="blue2">
+Developing Data product course focuses on three major areas (Shiny, Leaflets, ioslides presentation) for implementing useful data analysis functions.  
+
+Shiny is a modern programming in R for communicating insights from data. Shiny is developed by RStudio and it is a web application framework. Leaflets: is a widely used open source JavaScript library used to build web mapping applications.  Leaflet allows developers to very easily display tiled web maps hosted on a public server, with optional tiled overlays. ioslides: Helps creating a slide show for the web based viewing.
+
+I have developed an application which incorporates these learnings in a form of World Map with a pop-up presenting the Population and Life Expectancy projection for Year 2023 .
+
+</div>
+## Features Implemented
+
+- Leaflet - Map with multiple functions including  focus, zoom level, geo location etc
+- Shiny - ui and server with a drop down features (for selecting the country) and  check boxes (for selecting the Life Expectancy and Population details)
+- Calculations - Read data from html pages (UN website for more update to date and accurate numbers), a simple formula to calculate the projections for Year 2013 and Life Expectancy determination
+- Various R libraries are leveraged for standardization and easier data manipulations
+
+## Data and Calculation
+
+Data from multiple authentic websites are used for determining the population and life expectancy.  The United Nations publishes the data on periodic basis - the data is directly read from the website for most up to date information.   
+
+```{r echo = TRUE}
+
+population <- read_html("http://bit.ly/29Qqzm3") %>% html_nodes("table") %>% .[[2]] %>% html_table(trim = TRUE)
+population <-population[, c(2,5,6)]
+names(population) <- c("country", "Population 2016", "Population 2017")
+head(population,6)
+```
+Assumptions:  Mortality rate will remain some what constant.  Fertility rate will also remain constant over next 5 years.  No significant people migration due to war or other natural calamities
+
+## Learnings from the project
+
+- Developing a shiny application with associated supporting documentation (ioslides). 
+- Deploying the application on Rstudio's shiny server
+- Using the javascripts with leaflet
+- Developing a interactive application using (ui.R) and data manipulation (Server.R)
+- Displaying reactive output displayed as a result of server calculations
+- Designing simple prediction model
+- Map rending based on various leaflet features
+
+## Repository Details
+
+- Application:  Shiny Application has been deployed in <https://vesr.shinyapps.io/DevDataProductsVersion5/>
+
+- Github repository:  readme file, application, Server.R and ui.R are located in  <https://github.com/gitvesr/DevelopingDataProducts>
+
+- Rpub:  Pitch for the application with clear instructions <http://rpubs.com/vesr/ShinyAppsPitch>
+
+
+## References and Reading Materials
+
+UN Population statistics published information  <https://esa.un.org/unpd/wpp/>
+
+Quick Start Guide with Leaflet <http://leafletjs.com/examples/quick-start/>
+
+Shiny App Development <https://shiny.rstudio.com/>
